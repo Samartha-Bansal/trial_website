@@ -34,14 +34,20 @@ const Card = ({post} : {post: CardType}) => {
           </Link>
         </div>
 
-        <Link href={`/user/${author?._id}`}>
-          <Image src={author?.image!} alt={author?.name!} width={48} height={48} className='rounded-full'/>
-        </Link>
+        {author ? (
+          <Link href={`/user/${author._id}`}>
+            <Image src={author.image ?? "/images/Sky.avif"} alt={author.name ?? "Unknown"} width={48} height={48} className = 'rounded-full' />
+          </Link>
+        ) : (
+          <Image src="/images/Sky.avif" alt="Unknown Author" width={48} height={48} className='rounded-full' />
+        )}
       </div>
 
       <Link href={`/start/${_id}`}>
         <p className='start-card_desc'>{description}</p>
-        <img src={image} alt="placeholder" className='start-card_img' style={{ objectPosition: '50% 75%' }} />
+        <div className='relative w-full h-120'>
+        <Image src={image ?? "/images/Sky.avif"} alt="placeholder" fill className='start-card_img' style={{ objectPosition: '50% 75%' }} />
+        </div>
       </Link>
 
       <div className='flex-between gap-3 mt-5'>
